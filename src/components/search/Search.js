@@ -37,19 +37,23 @@ export default class Search extends React.Component {
       const validFilterAddition = filterToSet && !this.state.filters.includes(filterToSet);
       if (validFilterAddition) {
         this.log('set filter: ', filterToSet);
+        const filters = [...this.state.filters, filterToSet];
         this.setState({
-          filters: [...this.state.filters, filterToSet],
+          filters: filters,
           searchText: '',
           searchResults: [],
         });
+        this.props.selectedFiltersHandler(filters);
       }
     } else if (key === 'Backspace') {
       const text = this.state.searchText;
       if (!text.length) {
+        const filters = this.state.filters.slice(0, -1);
         this.setState(state => ({
-          filters: state.filters.slice(0, -1),
+          filters,
           searchText: state.filters.slice(-1)[0].split('').slice(0, -1).join(''),
         }));
+        this.props.selectedFiltersHandler(filters);
       }
     }
   }
