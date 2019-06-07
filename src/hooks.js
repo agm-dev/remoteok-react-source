@@ -2,6 +2,18 @@ import { useState, useEffect } from 'react';
 
 const JOBS_API_URL = 'https://brainl.es/remoteok/v1/remotejobs';
 
+function getTags(data = []) {
+  return data.reduce((final, current) => {
+    if (typeof current.tags !== 'undefined' && Array.isArray(current.tags)) {
+      const toAdd = current.tags
+        .filter(item => !final.includes(item))
+        .map(item => item.toLowerCase());
+      return [...final, ...toAdd];
+    }
+    return final;
+  }, []);
+}
+
 function useFetchJobs() {
   const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -15,14 +27,7 @@ function useFetchJobs() {
 
     setJobs(jobs);
     setLoading(false);
-    setTags([
-      'javascript',
-      'typescript',
-      'nodejs',
-      'react',
-      'angular',
-      'vue',
-    ]);
+    setTags(getTags(jobs));
     setSelectedJobs(jobs);
   }
 
