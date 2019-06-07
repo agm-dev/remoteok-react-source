@@ -7,11 +7,13 @@
     "react-dom": "^16.8.6",
     "react-scripts": "3.0.1"
   },
+  "homepage": "https://agm-dev.ninja/remoteok-react",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "publish": "gh-pages --dist ./build --branch master --remote ghpages"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -27,5 +29,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "gh-pages": "^2.0.1"
   }
 }
