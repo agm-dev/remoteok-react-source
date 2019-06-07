@@ -47,7 +47,7 @@ export default class Search extends React.Component {
       }
     } else if (key === 'Backspace') {
       const text = this.state.searchText;
-      if (!text.length) {
+      if (!text.length && this.state.filters.length) {
         const filters = this.state.filters.slice(0, -1);
         this.setState(state => ({
           filters,
